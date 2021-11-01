@@ -18,14 +18,21 @@ namespace HW16
             for (int i = 0; i < n; i++)
             {
                 products[i] = new Product();
-                Console.WriteLine("Ввод данных");
-                Console.WriteLine("Введите код товара");
+                Console.WriteLine($"Ввод данных продукта №{i+1}:");
+                Console.Write("Введите код товара ");
                 products[i].Code = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine("Введите наименование товара");
+                Console.Write("Введите наименование товара ");
                 products[i].Name = Convert.ToString(Console.ReadLine());
-                Console.WriteLine("Введите стоимость товара");
+                Console.Write("Введите стоимость товара ");
                 products[i].Price = double.Parse(Console.ReadLine());
             }
+            //foreach (var Product in products)
+            //    Console.WriteLine(Product);
+            //for (int i = 0; i < products.Length; i++)
+            //{
+            //    Console.WriteLine(products[i]);
+            //}
+
             string jsonString = JsonSerializer.Serialize(products);
             string path1 = "log";
             if (!Directory.Exists(path1))
@@ -40,10 +47,9 @@ namespace HW16
             File.WriteAllText(path, jsonString);
             string json = File.ReadAllText(path);
             Product[] product = JsonSerializer.Deserialize<Product[]>(json);
-            Console.WriteLine(json);
-            Console.WriteLine(product);
+            //Console.WriteLine(json);
+            //Console.WriteLine(product);
             Console.ReadKey();
-            //int maxValue = product.Max<int>();
         }
     }
     class Product
