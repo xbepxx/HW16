@@ -13,7 +13,7 @@ namespace HW16
     {
         static void Main(string[] args)
         {
-            int n = 2;
+            int n = 5;
             Product[] products = new Product[n];
             for (int i = 0; i < n; i++)
             {
@@ -26,13 +26,6 @@ namespace HW16
                 Console.Write("Введите стоимость товара ");
                 products[i].Price = double.Parse(Console.ReadLine());
             }
-            //foreach (var Product in products)
-            //    Console.WriteLine(Product);
-            //for (int i = 0; i < products.Length; i++)
-            //{
-            //    Console.WriteLine(products[i]);
-            //}
-
             string jsonString = JsonSerializer.Serialize(products);
             string path1 = "log";
             if (!Directory.Exists(path1))
@@ -47,6 +40,17 @@ namespace HW16
             File.WriteAllText(path, jsonString);
             string json = File.ReadAllText(path);
             Product[] product = JsonSerializer.Deserialize<Product[]>(json);
+            double max = product[0].Price;
+            string m="";
+            for (int i = 0; i < product.Length; i++)
+            {
+                if (product[i].Price>max)
+                {
+                    max = product[i].Price;
+                    m = product[i].Name;
+                }
+            }
+            Console.WriteLine($"Наименование самого дорогого товара: {m}");
             //Console.WriteLine(json);
             //Console.WriteLine(product);
             Console.ReadKey();
