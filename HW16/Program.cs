@@ -40,17 +40,27 @@ namespace HW16
             File.WriteAllText(path, jsonString);
             string json = File.ReadAllText(path);
             Product[] product = JsonSerializer.Deserialize<Product[]>(json);
+            Product P=new Product();
             double max = product[0].Price;
-            string m="";
+            //string m = "";
+            //for (int i = 0; i < product.Length; i++)
+            //{
+            //    if (product[i].Price > max)
+            //    {
+            //        max = product[i].Price;
+            //        m = product[i].Name;
+            //    }
+            //}
             for (int i = 0; i < product.Length; i++)
             {
-                if (product[i].Price>max)
+                if (product[i].Price > max)
                 {
                     max = product[i].Price;
-                    m = product[i].Name;
+                    P = product[i];
                 }
             }
-            Console.WriteLine($"Наименование самого дорогого товара: {m}");
+            Console.WriteLine($"Наименование самого дорогого товара: {P.Name}");
+            //Console.WriteLine($"Наименование самого дорогого товара: {m}");
             //Console.WriteLine(json);
             //Console.WriteLine(product);
             Console.ReadKey();
@@ -58,6 +68,10 @@ namespace HW16
     }
     class Product
     {
+        public Product()
+        {
+
+        }
         private int code; //код товара
         private string name; //наименование товара
         private double price; //стоимость товара
